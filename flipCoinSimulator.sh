@@ -3,7 +3,7 @@
 headWin=0
 TailWin=0
 
-for ((i=0;i<20;i++))
+for ((i=0;i<42;i++))
 do
 	win=$((RANDOM%2))
 
@@ -13,6 +13,23 @@ do
 	else
    	 ((TailWin=$TailWin+1))
 	fi
+   if (( $headWin == 21 || $TailWin == 21 ))
+   then
+      break
+   fi
 done
-echo "Head win : $headWin times"
-echo "Tail win : $TailWin times"
+echo "Head : $headWin times"
+echo "Tail : $TailWin times"
+if (( $headWin == $TailWin ))
+then
+   echo Tie
+else
+   echo Win
+	if (( $headWin > $TailWin ))
+	then
+   	echo "Head Win by $(($headWin-$TailWin)) counts"
+	elif (($TailWin > $headWin ))
+	then
+   	echo "Tail win by $(($TailWin-$headWin)) counts"
+   fi
+fi
